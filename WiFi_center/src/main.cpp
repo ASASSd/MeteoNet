@@ -14,8 +14,7 @@ void setup(){
   digitalWrite(LED_BUILTIN, HIGH);
   Serial.printf("Connecting to WIFI ");
   WiFi.begin("Keenetic-8636", "nVkcBZh3");
-  while (WiFi.status() != WL_CONNECTED)
-  {
+  while (WiFi.status() != WL_CONNECTED){
     delay(500);
     Serial.print(".");
   }
@@ -28,8 +27,7 @@ void setup(){
 
 
 
-String prepareHtmlPage()
-{
+String prepareHtmlPage(){
   String htmlPage =
      String("HTTP/1.1 200 OK\r\n") +
             "Content-Type: text/html\r\n" +
@@ -89,22 +87,17 @@ void maxMinValsDetect(){
 }
 }
 
-void loop()
-{
+void loop(){
   getVals();
   maxMinValsDetect();
   WiFiClient client = server.available();
-  if (client)
-  {
+  if (client){
     Serial.println("\n[Client connected]");
-    while (client.connected())
-    {
-      if (client.available())
-      {
+    while (client.connected()){
+      if (client.available()){
         String line = client.readStringUntil('\r');
         Serial.print(line);
-        if (line.length() == 1 && line[0] == '\n')
-        {
+        if (line.length() == 1 && line[0] == '\n'){
           digitalWrite(LED_BUILTIN, HIGH);
           client.println(prepareHtmlPage());
           digitalWrite(LED_BUILTIN, LOW);
