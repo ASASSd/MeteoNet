@@ -105,8 +105,8 @@ void loop(){
         }
       }
     }
-    Serial.println(hum);
-    Serial.print(temp);
+    //Serial.println(hum);
+    //Serial.print(temp);
     delay(2000);
     client.stop();
     Serial.println("[Client disconnected]");
